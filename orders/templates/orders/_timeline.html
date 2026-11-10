@@ -1,0 +1,9 @@
+{% if order.status == 'cancelled' %}
+    <div class="alert alert-danger mb-0">❌ Замовлення скасоване</div>
+{% else %}
+    <ol class="tl">
+        {% for step in order.timeline %}
+            <li class="{{ step.state }}">{{ step.label }}</li>
+        {% endfor %}
+    </ol>
+{% endif %}

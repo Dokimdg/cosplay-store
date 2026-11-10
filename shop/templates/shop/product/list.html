@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}{% if category %}{{ category.name }}{% else %}Каталог товарів{% endif %}{% endblock %}
+
+{% block content %}
+<div class="col-12 mb-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-white p-2 rounded shadow-sm mb-0">
+            <li class="breadcrumb-item"><a href="{% url 'shop:product_list' %}" class="text-decoration-none text-dark">🏠 Головна</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{% if category %}{{ category.name }}{% else %}Всі товари{% endif %}</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="col-12 mb-4">
+    <form method="get" class="row g-2">
+        <div class="col-md-8">
+            <input type="text" name="q" class="form-control" placeholder="Пошук косплею (наприклад: Наруто, Перука)..." value="{{ query }}">
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-dark w-100">🔍 Знайти</button>
+        </div>
+        <div class="col-md-2">
+            <select name="sort" class="form-select" data-autosubmit>
+                <option value="">Сортування</option>
+                <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Від дешевих до дорогих</option>
+                <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Від дорогих до дешевих</option>
+                <option value="newest" {% if sort == 'newest' %}selected{% endif %}>Спочатку нові</option>
+            </select>
+        </div>
+    </form>
+</div>
+
+<div class="col-md-3">
+    <div class="card p-3 mb-4 shadow-sm">
+        <h5>Категорії</h5>
+        <div class="list-group">
+            <a href="{% url 'shop:product_list' %}{% if query %}?q={{ query|urlencode }}{% endif %}"
+               class="list-group-item list-group-item-action {% if not category %}active{% endif %}">Всі товари</a>
+            {% for c in categories %}
+                <a href="{{ c.get_absolute_url }}{% if query %}?q={{ query|urlencode }}{% endif %}"
+                   class="list-group-item list-group-item-action {% if category.id == c.id %}active{% endif %}">{{ c.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="col-md-9">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for product in products %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    {% with image=product.images.all.0 %}
+                        {% if image %}
+                            <img src="{{ image.image.url }}" class="card-img-top product-thumb" alt="{{ product.name }}">
+                        {% else %}
+                            <div class="bg-secondary-subtle d-flex align-items-center justify-content-center fs-1 product-thumb-placeholder">🎭</div>
+                        {% endif %}
+                    {% endwith %}
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="text-muted small mb-1">{{ product.category.name }}</p>
+                        <h4 class="text-primary mt-auto">{{ product.price }} грн</h4>
+                        <a href="{{ product.get_absolute_url }}" class="btn btn-outline-dark btn-sm mt-2">Детальніше</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="alert alert-warning">За вашим запитом нічого не знайдено.</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if products.has_other_pages %}
+        <nav class="mt-5">
+            <ul class="pagination justify-content-center">
+                {% if products.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">&laquo;</a></li>
+                {% endif %}
+                {% for i in products.paginator.page_range %}
+                    <li class="page-item {% if products.number == i %}active{% endif %}">
+                        <a class="page-link" href="?page={{ i }}{% if querystring %}&{{ querystring }}{% endif %}">{{ i }}</a>
+                    </li>
+                {% endfor %}
+                {% if products.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">&raquo;</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+</div>
+{% endblock %}

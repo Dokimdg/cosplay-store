@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Забагато запитів</title>
+    <style>
+        body { font-family: system-ui, sans-serif; background: #f8f9fa; display: flex; min-height: 100vh;
+               align-items: center; justify-content: center; margin: 0; }
+        .box { background: #fff; padding: 2rem 2.5rem; border-radius: .5rem; box-shadow: 0 1px 6px rgba(0,0,0,.15); text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>🛑 Забагато запитів</h1>
+        <p>Ви надсилаєте запити занадто часто. Спробуйте ще раз приблизно через {{ retry_after }} с.</p>
+    </div>
+</body>
+</html>

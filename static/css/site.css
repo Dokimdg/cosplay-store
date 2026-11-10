@@ -1,0 +1,16 @@
+/* Стилі, винесені з шаблонів (щоб працював суворий CSP без 'unsafe-inline') */
+.product-thumb { height: 200px; object-fit: cover; }
+.product-thumb-placeholder { height: 200px; }
+.product-photo-placeholder { height: 320px; font-size: 5rem; }
+
+/* Timeline статусів замовлення */
+.tl { display: flex; list-style: none; padding: 0; margin: 0; }
+.tl li { flex: 1; text-align: center; position: relative; font-size: .85rem; }
+.tl li::before { content: ''; display: block; width: 28px; height: 28px; border-radius: 50%;
+    margin: 0 auto 6px; background: #dee2e6; position: relative; z-index: 1; }
+.tl li::after { content: ''; position: absolute; top: 13px; left: -50%; width: 100%; height: 3px; background: #dee2e6; }
+.tl li:first-child::after { display: none; }
+.tl li.done::before { background: #198754; }
+.tl li.done::after, .tl li.current::after { background: #198754; }
+.tl li.current::before { background: #ffc107; box-shadow: 0 0 0 4px #fff3cd; }
+.tl li.done, .tl li.current { font-weight: 600; }

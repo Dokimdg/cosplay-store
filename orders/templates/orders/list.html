@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Мої замовлення{% endblock %}
+{% block content %}
+<div class="col-md-9 mx-auto">
+    <h2 class="mb-4">📦 Мої замовлення</h2>
+    {% for order in orders %}
+        <a href="{% url 'orders:order_detail' order.id %}" class="card shadow-sm p-3 mb-2 text-decoration-none text-dark">
+            <div class="d-flex justify-content-between flex-wrap gap-2">
+                <strong>Замовлення #{{ order.id }} від {{ order.created|date:"d.m.Y" }}</strong>
+                <span class="badge text-bg-secondary">{{ order.get_status_display }}</span>
+            </div>
+        </a>
+    {% empty %}
+        <div class="alert alert-info">У вас ще немає замовлень.</div>
+    {% endfor %}
+</div>
+{% endblock %}
