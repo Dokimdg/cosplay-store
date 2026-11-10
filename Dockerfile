@@ -24,4 +24,4 @@ RUN python manage.py collectstatic --noinput
 EXPOSE 8000
 
 # Запуск через Gunicorn
-CMD ["gunicorn", "cosplay_store.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["sh", "-c", "python manage.py migrate --noinput && gunicorn cosplay_store.wsgi:application --bind 0.0.0.0:8000"]
