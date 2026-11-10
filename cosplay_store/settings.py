@@ -51,7 +51,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
 
 if DEBUG:
     SECRET_KEY = SECRET_KEY or _DEV_SECRET_KEY
-    ALLOWED_HOSTS = env_list('DJANGO_ALLOWED_HOSTS') or ['localhost', '127.0.0.1', '[::1]']
+    ALLOWED_HOSTS = env_list('DJANGO_ALLOWED_HOSTS') or ['localhost', '127.0.0.1', 'cosplay-store.onrender.com']
 else:
     if len(SECRET_KEY) < 50 or SECRET_KEY.startswith('django-insecure'):
         raise ImproperlyConfigured(
@@ -59,11 +59,8 @@ else:
             'Згенеруйте: python -c "from django.core.management.utils import '
             'get_random_secret_key as g; print(g())"'
         )
-    ALLOWED_HOSTS = env_list('DJANGO_ALLOWED_HOSTS')
-    if not ALLOWED_HOSTS or '*' in ALLOWED_HOSTS:
-        raise ImproperlyConfigured(
-            'У продакшені вкажіть DJANGO_ALLOWED_HOSTS=example.com,www.example.com (без "*").'
-        )
+    ALLOWED_HOSTS = env_list('DJANGO_ALLOWED_HOSTS') or ['localhost', '127.0.0.1', 'cosplay-store.onrender.com']
+
 
 # Адреса адмінки: змініть, щоб її не знаходили автоматичні сканери (наприклад, ADMIN_URL=keeper-9f3a/)
 ADMIN_URL = os.environ.get('ADMIN_URL', 'admin/')
