@@ -1,10 +1,10 @@
 services:
   - type: web
     name: cosplayshop
-    env: docker
+    env: python
     plan: free
-    buildCommand: ""
-    startCommand: ""
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn cosplay_store.wsgi:application"
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
