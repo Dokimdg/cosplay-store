@@ -67,6 +67,7 @@ ADMIN_URL = os.environ.get('ADMIN_URL', 'admin/')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'accounts.apps.AccountsConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -74,7 +75,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop',
     'cart.apps.CartConfig',
-    'accounts.apps.AccountsConfig',
     'orders.apps.OrdersConfig',
 ]
 
