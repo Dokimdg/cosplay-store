@@ -14,3 +14,70 @@
 .tl li.done::after, .tl li.current::after { background: #198754; }
 .tl li.current::before { background: #ffc107; box-shadow: 0 0 0 4px #fff3cd; }
 .tl li.done, .tl li.current { font-weight: 600; }
+
+/* Японська тема для всього сайту */
+:root {
+    --bg-washi: #F7F4EB;
+    --text-ink: #1F1D24;
+    --accent-torii: #C83E3B;
+    --accent-indigo: #23395B;
+    --accent-gold: #C5A059;
+    --border-shoji: #DCD5C7;
+}
+
+body.japanese-theme-body {
+    background-color: var(--bg-washi) !important;
+    color: var(--text-ink);
+    font-family: 'Montserrat', sans-serif;
+    background-image: radial-gradient(var(--border-shoji) 0.5px, transparent 0.5px);
+    background-size: 20px 20px;
+}
+
+/* Шапка (Navbar) у стилі індиго */
+.japanese-navbar {
+    background-color: var(--accent-indigo) !important;
+    border-bottom: 3px solid var(--accent-gold);
+    box-shadow: 0 4px 12px rgba(31, 29, 36, 0.15);
+}
+
+.japanese-navbar .navbar-brand {
+    font-family: 'Playfair Display', serif;
+    color: #FFFDF9 !important;
+    letter-spacing: 0.05em;
+    font-size: 1.5rem;
+}
+
+/* Кнопки */
+.btn-japanese-cart {
+    background-color: var(--accent-gold) !important;
+    color: #1F1D24 !important;
+    border: none;
+}
+
+.btn-japanese-primary {
+    background-color: var(--accent-torii) !important;
+    border: 1px solid var(--accent-torii) !important;
+    color: #FFFDF9;
+}
+
+.btn-japanese-primary:hover {
+    background-color: #A62C29 !important;
+}
+
+.btn-outline-japanese {
+    color: #F7F4EB;
+    border-color: var(--border-shoji);
+}
+
+.btn-outline-japanese:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #FFFDF9;
+    border-color: #FFFDF9;
+}
+
+/* Футер */
+.japanese-footer {
+    background-color: #1F1D24;
+    color: var(--border-shoji);
+    border-top: 3px solid var(--accent-torii);
+}
