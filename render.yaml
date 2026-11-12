@@ -3,6 +3,7 @@ services:
     name: cosplayshop
     env: python
     plan: free
+    rootDir: CosplayShop
     buildCommand: "pip install -r requirements.txt"
     startCommand: "gunicorn cosplay_store.wsgi:application"
     envVars:
