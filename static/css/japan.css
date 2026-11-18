@@ -1,0 +1,231 @@
+/* =====================================================================
+   japan.css — ТЕМНА японська тема (和風・夜) поверх існуючого сайту.
+   Нічого в проєкті не змінює: лише перекриває вигляд існуючих класів.
+   Версія для коміту «superuser» (шапка navbar bg-dark, body.bg-light).
+   Підключення: ОДИН рядок у templates/base.html ПІСЛЯ site.css:
+       <link href="{% static 'css/japan.css' %}" rel="stylesheet">
+   Працює під вашим суворим CSP (шрифти — з cdn.jsdelivr.net, візерунки — data: SVG).
+      ===================================================================== */
+
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/600.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/700.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/400.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/500.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/600.css");
+
+/* ---------- Палітра ночі ---------- */
+:root {
+    color-scheme: dark;
+    --bg-washi: #181614;         /* темна туш — фон сторінки */
+    --text-ink: #EFE6D2;         /* світлий «папір» — текст */
+    --accent-torii: #E04A3F;     /* кіновар (світліша для темного фону) */
+    --accent-indigo: #0F0E0D;    /* шапка */
+    --accent-gold: #D4AE4A;
+    --border-shoji: #3A3532;
+
+    --jp-paper: #211F1D;         /* картки */
+    --jp-paper-2: #2A2724;
+    --jp-shu-dark: #BE3329;
+    --jp-muted: #A89B84;
+    --jp-ai: #8FB0E6;
+    --jp-serif: 'Playfair Display', 'Noto Serif JP', 'Yu Mincho', Georgia, serif;
+    --jp-sans: 'Montserrat', 'Noto Sans JP', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+html { scroll-behavior: smooth; background: var(--bg-washi); }
+::selection { background: var(--accent-torii); color: #fff; }
+
+/* ---------- Тло: крапки + пелюстки сакури, сонце та хвилі ---------- */
+body.bg-light {
+    position: relative;
+    background-color: var(--bg-washi) !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cg transform='translate%2830 40%29 rotate%2820%29'%3E%3Cpath d='M0 0 C4 -9 14 -9 18 0 C14 7 4 7 0 0 Z' fill='%23f2a7b6' fill-opacity='.13'/%3E%3C/g%3E%3Cg transform='translate%28120 90%29 rotate%28-35%29'%3E%3Cpath d='M0 0 C4 -9 14 -9 18 0 C14 7 4 7 0 0 Z' fill='%23f2a7b6' fill-opacity='.13'/%3E%3C/g%3E%3Cg transform='translate%28210 30%29 rotate%2860%29'%3E%3Cpath d='M0 0 C4 -9 14 -9 18 0 C14 7 4 7 0 0 Z' fill='%23f2a7b6' fill-opacity='.13'/%3E%3C/g%3E%3Cg transform='translate%2870 170%29 rotate%28-10%29'%3E%3Cpath d='M0 0 C4 -9 14 -9 18 0 C14 7 4 7 0 0 Z' fill='%23f2a7b6' fill-opacity='.13'/%3E%3C/g%3E%3Cg transform='translate%28180 200%29 rotate%2845%29'%3E%3Cpath d='M0 0 C4 -9 14 -9 18 0 C14 7 4 7 0 0 Z' fill='%23f2a7b6' fill-opacity='.13'/%3E%3C/g%3E%3Cg transform='translate%28260 150%29 rotate%28-60%29'%3E%3Cpath d='M0 0 C4 -9 14 -9 18 0 C14 7 4 7 0 0 Z' fill='%23f2a7b6' fill-opacity='.13'/%3E%3C/g%3E%3Cg transform='translate%2820 260%29 rotate%2830%29'%3E%3Cpath d='M0 0 C4 -9 14 -9 18 0 C14 7 4 7 0 0 Z' fill='%23f2a7b6' fill-opacity='.13'/%3E%3C/g%3E%3Cg transform='translate%28140 270%29 rotate%28-25%29'%3E%3Cpath d='M0 0 C4 -9 14 -9 18 0 C14 7 4 7 0 0 Z' fill='%23f2a7b6' fill-opacity='.13'/%3E%3C/g%3E%3C/svg%3E"), radial-gradient(rgba(239,230,210,.05) 1px, transparent 1px);
+    background-size: 300px 300px, 18px 18px;
+    color: var(--text-ink);
+    font-family: var(--jp-sans);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+body.bg-light > main { flex: 1 0 auto; position: relative; z-index: 1; }
+body.bg-light > nav, body.bg-light > footer { position: relative; z-index: 2; }
+
+body.bg-light::before {   /* велике червоне сонце у кутку */
+    content: ""; position: fixed; z-index: 0; pointer-events: none;
+    top: -200px; right: -150px; width: 620px; height: 620px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(224,74,63,.26) 0 56%, rgba(224,74,63,.12) 57% 72%, rgba(224,74,63,.05) 73% 100%);
+}
+body.bg-light::after {    /* хвилі сейгайха внизу екрана */
+    content: ""; position: fixed; z-index: 0; pointer-events: none;
+    left: 0; right: 0; bottom: 0; height: 280px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='45' viewBox='0 0 60 30'%3E%3Ccircle cx='30' cy='0' r='28' fill='%23181614' stroke='%23e04a3f55' stroke-width='1'/%3E%3Ccircle cx='30' cy='0' r='21' fill='%23181614' stroke='%23e04a3f55' stroke-width='1'/%3E%3Ccircle cx='30' cy='0' r='14' fill='%23181614' stroke='%23e04a3f55' stroke-width='1'/%3E%3Ccircle cx='30' cy='0' r='7' fill='%23181614' stroke='%23e04a3f55' stroke-width='1'/%3E%3Ccircle cx='0' cy='15' r='28' fill='%23181614' stroke='%23e04a3f55' stroke-width='1'/%3E%3Ccircle cx='0' cy='15' r='21' fill='%23181614' stroke='%23e04a3f55' stroke-width='1'/%3E%3Ccircle cx='0' cy='15' r='14' fill='%23181614' stroke='%23e04a3f55' stroke-width='1'/%3E%3Ccircle cx='0' cy='15' r='7' fill='%23181614' stroke='%23e04a3f55' stroke-width='1'/%3E%3Ccircle cx='60' cy='15' r='28' fill='%23181614' stroke='%23e04a3f55' stroke-width='1'/%3E%3Ccircle cx='60' cy='15' r='21' fill='%23181614' stroke='%23e04a3f55' stroke-width='1'/%3E%3Ccircle cx='60' cy='15' r='14' fill='%23181614' stroke='%23e04a3f55' stroke-width='1'/%3E%3Ccircle cx='60' cy='15' r='7' fill='%23181614' stroke='%23e04a3f55' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='28' fill='%23181614' stroke='%23e04a3f55' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='21' fill='%23181614' stroke='%23e04a3f55' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='14' fill='%23181614' stroke='%23e04a3f55' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='7' fill='%23181614' stroke='%23e04a3f55' stroke-width='1'/%3E%3C/svg%3E"); background-size: 90px 45px; background-position: bottom left;
+    -webkit-mask-image: linear-gradient(to top, #000, transparent); mask-image: linear-gradient(to top, #000, transparent);
+    opacity: .7;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: var(--jp-serif); font-weight: 700; color: var(--text-ink); }
+a { color: var(--accent-torii); }
+a:hover { color: #ff7468; }
+.text-muted { color: var(--jp-muted) !important; }
+.text-dark { color: var(--text-ink) !important; }
+
+/* ---------- Шапка ---------- */
+.navbar {
+    position: relative;
+    background-color: var(--accent-indigo) !important;
+    border-bottom: 3px solid var(--accent-torii);
+    box-shadow: 0 6px 24px rgba(0,0,0,.45);
+    padding-top: .7rem; padding-bottom: .7rem;
+}
+.navbar::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -17px; height: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30' viewBox='0 0 60 30'%3E%3Ccircle cx='30' cy='0' r='28' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='30' cy='0' r='21' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='30' cy='0' r='14' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='30' cy='0' r='7' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='0' cy='15' r='28' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='0' cy='15' r='21' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='0' cy='15' r='14' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='0' cy='15' r='7' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='60' cy='15' r='28' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='60' cy='15' r='21' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='60' cy='15' r='14' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='60' cy='15' r='7' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='28' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='21' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='14' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='7' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3C/svg%3E"); background-size: 60px 30px; background-position: bottom left;
+    -webkit-mask-image: linear-gradient(#000, transparent); mask-image: linear-gradient(#000, transparent);
+    pointer-events: none;
+}
+.navbar .navbar-brand {
+    display: inline-flex; align-items: center; gap: .65rem;
+    font-family: var(--jp-serif); font-size: 1.45rem; letter-spacing: .04em; color: #F6EFE1 !important;
+}
+.navbar .navbar-brand::before {
+    content: ""; width: .85rem; height: .85rem; border-radius: 50%;
+    background: var(--accent-torii); box-shadow: 0 0 0 3px rgba(224,74,63,.3), 0 0 16px rgba(224,74,63,.6);
+}
+.navbar .btn { box-shadow: none; }
+
+/* ---------- Кнопки ---------- */
+.btn { border-radius: 2px; font-weight: 500; letter-spacing: .03em; transition: transform .12s, box-shadow .12s, background-color .15s, color .15s, border-color .15s; }
+.navbar .btn-warning { background-color: var(--accent-gold) !important; color: #1F1D1C !important; border: 1px solid var(--accent-gold) !important; }
+.navbar .btn-warning:hover { background-color: #e6c25f !important; }
+.navbar .btn-primary { background-color: var(--accent-torii) !important; border-color: var(--accent-torii) !important; color: #fff !important; }
+.navbar .btn-primary:hover { background-color: var(--jp-shu-dark) !important; }
+.navbar .btn-outline-light { color: #F6EFE1; border-color: rgba(246,239,225,.45); }
+.navbar .btn-outline-light:hover { background-color: rgba(246,239,225,.12); color: #fff; border-color: #fff; }
+
+main .btn-dark { background: var(--jp-paper-2); border: 2px solid var(--text-ink); color: var(--text-ink); }
+main .btn-dark:hover { background: var(--text-ink); border-color: var(--text-ink); color: #181614; }
+main .btn-dark.btn-lg, main .btn-primary, main .btn-success {
+    background: var(--accent-torii); border: 2px solid var(--accent-torii); color: #fff;
+    box-shadow: 3px 3px 0 var(--accent-gold);
+}
+main .btn-dark.btn-lg:hover, main .btn-primary:hover, main .btn-success:hover {
+    background: #f05a4f; border-color: #f05a4f; color: #fff;
+    transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--accent-gold);
+}
+main .btn-outline-dark { border: 2px solid var(--text-ink); color: var(--text-ink); background: transparent; }
+main .btn-outline-dark:hover { background: var(--text-ink); color: #181614; }
+main .btn-outline-secondary { border: 2px solid var(--jp-muted); color: var(--text-ink); }
+main .btn-outline-secondary:hover { background: var(--jp-muted); color: #181614; }
+main .btn-outline-danger { border-width: 2px; }
+.btn-link { color: var(--accent-torii); text-decoration: none; }
+.btn-link:hover { color: #ff7468; text-decoration: underline; }
+
+/* ---------- Картки ---------- */
+.card { background-color: var(--jp-paper); border: 1px solid var(--border-shoji); border-radius: 3px; color: var(--text-ink); }
+.card.shadow-sm { box-shadow: 0 2px 14px rgba(0,0,0,.35) !important; }
+.card.h-100 { transition: transform .18s, box-shadow .18s, border-color .18s; overflow: hidden; }
+.card.h-100:hover { transform: translateY(-4px); border-color: var(--accent-torii); box-shadow: 0 8px 0 var(--accent-torii), 0 18px 30px rgba(0,0,0,.5) !important; }
+.card-img-top.product-thumb { height: auto; aspect-ratio: 4 / 5; object-fit: cover; transition: transform .35s; }
+.card.h-100:hover .card-img-top.product-thumb { transform: scale(1.04); }
+.product-thumb-placeholder { height: auto; aspect-ratio: 4 / 5; background-color: var(--jp-paper-2) !important; color: var(--accent-torii); }
+.card-title { font-family: var(--jp-serif); font-size: 1.02rem; line-height: 1.35; }
+.card .text-primary, .text-primary { color: var(--accent-gold) !important; font-family: var(--jp-serif); font-weight: 700; }
+.card h4.text-primary { font-size: 1.35rem; }
+
+/* ---------- Список категорій ---------- */
+.card > h5 { font-family: var(--jp-serif); border-left: 5px solid var(--accent-torii); padding-left: .6rem; margin-bottom: 1rem; }
+.list-group-item { background: transparent; border-color: var(--border-shoji); color: var(--text-ink); font-weight: 500; }
+.list-group-item-action:hover, .list-group-item-action:focus { background: var(--jp-paper-2); color: var(--accent-torii); }
+.list-group-item.active { background: var(--accent-torii); border-color: var(--accent-torii); color: #fff; }
+
+/* ---------- Хлібні крихти ---------- */
+.breadcrumb.bg-white { background-color: var(--jp-paper) !important; border: 1px solid var(--border-shoji); border-radius: 3px !important; box-shadow: none !important; }
+.breadcrumb a.text-dark { color: var(--text-ink) !important; }
+.breadcrumb a.text-dark:hover { color: var(--accent-torii) !important; }
+.breadcrumb-item + .breadcrumb-item::before { content: "\203A"; color: var(--accent-torii); }
+.breadcrumb-item.active { color: var(--jp-muted); }
+
+/* ---------- Форми ---------- */
+.form-control, .form-select { background-color: #1B1917; border: 2px solid #8A7D68; border-radius: 2px; color: var(--text-ink); }
+.form-control:focus, .form-select:focus { background-color: #1B1917; color: var(--text-ink); border-color: var(--accent-torii); box-shadow: 0 0 0 .2rem rgba(224,74,63,.25); }
+.form-control::placeholder { color: #857a68; }
+.form-label { font-weight: 500; }
+.form-check-input { background-color: #1B1917; border-color: #8A7D68; }
+.form-check-input:checked { background-color: var(--accent-torii); border-color: var(--accent-torii); }
+
+/* ---------- Сторінка товару ---------- */
+img.img-fluid.rounded { border: 1px solid var(--border-shoji); background: var(--jp-paper); padding: 6px; border-radius: 3px !important; box-shadow: 0 6px 24px rgba(0,0,0,.5) !important; }
+.product-photo-placeholder { background-color: var(--jp-paper-2) !important; color: var(--accent-torii); border: 1px solid var(--border-shoji); }
+h1.h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); }
+h3.text-primary { font-size: 2rem; }
+.text-success { color: #9ccf93 !important; font-weight: 500; }
+.text-danger { color: #ff7468 !important; }
+
+/* ---------- Форма оформлення замовлення (form.as_p без класів Bootstrap) ---------- */
+form p { margin-bottom: 1rem; }
+form p label { display: block; font-weight: 500; margin-bottom: .25rem; }
+form p input:not([type=checkbox]):not([type=radio]):not([type=hidden]), form p textarea, form p select {
+    width: 100%; padding: .45rem .75rem; background-color: #1B1917; color: var(--text-ink);
+    border: 2px solid #8A7D68; border-radius: 2px; font-family: inherit;
+}
+form p input:focus, form p textarea:focus, form p select:focus { outline: none; border-color: var(--accent-torii); box-shadow: 0 0 0 .2rem rgba(224,74,63,.25); }
+form p input::placeholder, form p textarea::placeholder { color: #857a68; }
+.errorlist { list-style: none; padding: 0; margin: 0 0 .35rem; color: #ff7468; font-size: .9rem; }
+.helptext { color: var(--jp-muted); font-size: .85rem; }
+
+/* ---------- Таблиці (кошик, замовлення) ---------- */
+.table { --bs-table-bg: transparent; --bs-table-color: var(--text-ink); --bs-table-border-color: var(--border-shoji); --bs-table-striped-color: var(--text-ink); --bs-table-hover-color: var(--text-ink); color: var(--text-ink); }
+.table > thead > tr > th { font-family: var(--jp-serif); }
+.table-dark { --bs-table-bg: #0F0E0D; --bs-table-color: #F6EFE1; --bs-table-border-color: #3A3532; }
+.table-striped > tbody > tr:nth-of-type(odd) > * { --bs-table-bg-type: rgba(255,255,255,.035); color: var(--text-ink); }
+.bg-white, .bg-light { background-color: var(--jp-paper) !important; color: var(--text-ink); }
+
+/* ---------- Рядок «Загальна вартість» у кошику ---------- */
+.table-light { --bs-table-bg: #2A2724; --bs-table-color: var(--text-ink); --bs-table-border-color: #3A3532; --bs-table-striped-bg: #2A2724; }
+.table-hover > tbody > tr:hover > * { --bs-table-hover-bg: rgba(255,255,255,.05); --bs-table-hover-color: var(--text-ink); }
+.fs-1.product-thumb-placeholder { font-size: 3rem !important; }
+
+/* ---------- Пагінація ---------- */
+.page-link { color: var(--text-ink); background-color: var(--jp-paper); border-color: var(--border-shoji); }
+.page-link:hover { background-color: var(--jp-paper-2); color: var(--accent-torii); border-color: var(--border-shoji); }
+.page-item.active .page-link { background-color: var(--accent-torii); border-color: var(--accent-torii); color: #fff; }
+.page-item.disabled .page-link { background-color: #1B1917; color: #6f6556; border-color: var(--border-shoji); }
+.page-link:focus { box-shadow: 0 0 0 .2rem rgba(224,74,63,.25); }
+
+/* ---------- Повідомлення ---------- */
+.alert, .alert { border-radius: 2px; border: 1px dashed var(--jp-muted); color: var(--text-ink); }
+.alert-info, .alert-warning { background-color: #2B2619; }
+.alert-success { background-color: #1F2A1F; }
+.alert-danger { background-color: #3A1E1B; }
+
+/* ---------- Статуси замовлення (timeline) ---------- */
+.tl li::before { background: #3A3532; }
+.tl li::after { background: #3A3532; }
+.tl li.done::before { background: var(--jp-ai); }
+.tl li.done::after, .tl li.current::after { background: var(--jp-ai); }
+.tl li.current::before { background: var(--accent-gold); box-shadow: 0 0 0 4px rgba(212,174,74,.3); }
+
+/* ---------- Футер ---------- */
+.japanese-footer {
+    position: relative; margin-top: 4rem !important;
+    background-color: #0F0E0D; color: #D9CCB0;
+    border-top: 3px solid var(--accent-torii);
+}
+.japanese-footer::before {
+    content: ""; position: absolute; left: 0; right: 0; top: -17px; height: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30' viewBox='0 0 60 30'%3E%3Ccircle cx='30' cy='0' r='28' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='30' cy='0' r='21' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='30' cy='0' r='14' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='30' cy='0' r='7' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='0' cy='15' r='28' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='0' cy='15' r='21' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='0' cy='15' r='14' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='0' cy='15' r='7' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='60' cy='15' r='28' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='60' cy='15' r='21' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='60' cy='15' r='14' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='60' cy='15' r='7' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='28' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='21' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='14' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='7' fill='%23181614' stroke='%23e04a3f88' stroke-width='1'/%3E%3C/svg%3E"); background-size: 60px 30px; background-position: top left; transform: scaleY(-1);
+    -webkit-mask-image: linear-gradient(#000, transparent); mask-image: linear-gradient(#000, transparent);
+    pointer-events: none;
+}
+.japanese-footer .text-muted { color: #BFB293 !important; }
+
+/* ---------- Мобільні та скролбар ---------- */
+@media (max-width: 575.98px) {
+    .navbar .navbar-brand { font-size: 1.2rem; }
+    body.bg-light::before { width: 380px; height: 380px; top: -140px; right: -140px; }
+    body.bg-light::after { height: 180px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .btn, .card.h-100, .card-img-top.product-thumb { transition: none; }
+    html { scroll-behavior: auto; }
+}
